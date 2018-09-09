@@ -1,7 +1,7 @@
 Welcome to Rak!
 
 Rak is a free,fast & realistic renderer designed to work on any gpu. 
-Rak is licensed under the CC0 license, so feel free to use the software for anything! 
+Rak is licensed under the MIT license, so feel free to use the software for anything! 
 
 If this is your first time using the software, feel free to check out the documentation!
 
