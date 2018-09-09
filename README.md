@@ -1,4 +1,4 @@
-![screenshot]https://github.com/UglySwedishFish/Rak/blob/master/GUI/Welcome.png?raw=true)
+![screenshot](https://github.com/UglySwedishFish/Rak/blob/master/GUI/Welcome.png?raw=true)
 
 Rak is a real-time hybrid path tracing engine written in C++. It currently uses OpenGL for rendering. Currently uses a SAH BVH as the acceleration structure.
 
