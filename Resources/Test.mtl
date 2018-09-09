@@ -1,0 +1,78 @@
+# Blender MTL File: 'None'
+# Material Count: 6
+
+newmtl BaseWood.009
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Materials\FullResolution\Bark 1\Albedo.jpg
+disp Materials\\FullResolution\\Bark 1\\DRM.png
+
+newmtl Floor.009
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Materials\FullResolution\Bark 1\Albedo.jpg
+disp Materials\\FullResolution\\Bark 1\\DRM.png
+map_Ka Materials\\FullResolution\\Bark 1\\Normal.jpg
+
+newmtl PillarWood.009
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Materials\FullResolution\Bark 1\Albedo.jpg
+disp Materials\\FullResolution\\Bark 1\\DRM.png
+
+newmtl Roof.009
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Materials\FullResolution\Bark 1\Albedo.jpg
+disp Materials\\FullResolution\\Bark 1\\DRM.png
+map_Ka Materials\\FullResolution\\Bark 1\\Normal.jpg
+
+newmtl Tiles.009
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Materials\FullResolution\Bark 1\Albedo.jpg
+disp Materials\\FullResolution\\Bark 1\\DRM.png
+map_Ka Materials\\FullResolution\\Bark 1\\Normal.jpg
+
+newmtl Wood
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Materials\FullResolution\Bark 1\Albedo.jpg
+disp Materials\\FullResolution\\Bark 1\\DRM.png
+map_Ka Materials\\FullResolution\\Bark 1\\Normal.jpg
