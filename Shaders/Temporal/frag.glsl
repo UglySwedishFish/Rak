@@ -70,7 +70,7 @@ void main() {
 
 				//compute current frame 
 
-				float Temporal = min(float(Frame) / float(Frame + 1), 0.96666); //0.96666 is used so that temporal filtering
+				float Temporal = min(float(Frame) / float(Frame + 1), 0.98); //0.96666 is used so that temporal filtering
 				//doesnt take ages to reset
 				//this means that if I for instance change a lights direction and/or position the temporal filtering doesnt
 				//completely ruin the realism 

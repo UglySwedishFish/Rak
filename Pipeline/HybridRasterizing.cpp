@@ -18,7 +18,7 @@ void Rak::Rendering::Rasterizer::DefferedPipeLine::DrawDeffered(std::vector<Mesh
 
 	BindTextures(3); 
 
-	for (auto Model : BaseModels) {
+	for (auto & Model : BaseModels) {
 		Mesh::DrawModel(Model, Deffered, Camera, Window); //draw the model itself 
 	}
 

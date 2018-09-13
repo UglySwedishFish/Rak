@@ -27,11 +27,22 @@ void Rak::Rendering::Mesh::MeshMaterials::UpdateMaterials()
 
 	for (int Material = 0; Material < Data.size(); Material+=2) {
 		Data[Material] = Materials[Material/2].AlbedoMultiplier; 
-		Data[Material + 1] = Materials[Material / 2].ValueTwo;
+
+		switch (Materials[Material / 2].WorkFlow) {
+		case 0:
+			Data[Material + 1] = glm::vec3(Materials[Material / 2].MaterialZoom, glm::intBitsToFloat(Materials[Material / 2].Texture), -1.f);
+			break;
+		case 1:
+			Data[Material + 1] = glm::vec3(0.,Materials[Material / 2].ValueTwo.y, Materials[Material / 2].ValueTwo.z);
+			break; 
+		case 2:
+			Data[Material + 1] = glm::vec3(0.f, Materials[Material / 2].ValueTwo.y, -20.f);
+			break;
+		}
 	}
 
 	glBindTexture(GL_TEXTURE_1D, MaterialTexture);
-	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB16F, Materials.size()*2, 0, GL_RGB, GL_FLOAT, &Data[0]);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB32F, Materials.size()*2, 0, GL_RGB, GL_FLOAT, &Data[0]);
 	glBindTexture(GL_TEXTURE_1D, 0);
 }
 

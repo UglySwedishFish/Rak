@@ -17,6 +17,7 @@ vec3 Tangent;
 } VS_OUT; 
 
 void main(void) {	
+
 	gl_Position = ProjectionMatrix * ViewMatrix * vec4(Pos,1.0); 
 	VS_OUT.Position = Pos;
 	VS_OUT.Normal = Normals; 

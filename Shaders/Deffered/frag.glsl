@@ -29,25 +29,48 @@ uniform sampler1D Materials;
 void main() {
 	
 	int Index = int(floor(FS_IN.TexCoord.z * 100.f + .1f)); 
-	vec4 RawMaterial = texelFetch(Materials, Index, 0); 
-	int Material = int(floor(RawMaterial.a * 128.f + .1f)); 
+	vec4 RawMaterial = texelFetch(Materials, Index*2, 0); 
+	vec4 Material2 = texelFetch(Materials, Index*2+1, 0); 
 
-	vec3 TextureCoordinate = vec3(FS_IN.TexCoord.xy,float(Material)); 
-	
-	vec3 Norm = normalize(FS_IN.Normal);
-    vec3 Tang = normalize(FS_IN.Tangent);
-    vec3 Tangent = normalize(Tang - dot(Tang, Norm) * Norm);
-    vec3 Bitangent = normalize(cross(Tang, Norm));
-	mat3 TBN = mat3(Tangent,Bitangent,Norm); 
+
+	int WorkFlow = Material2.z < -10.f ? 2 : Material2.z < -.5f ? 0 : 1; 
+
+
+	int Material = floatBitsToInt(Material2.y);  
+	if(WorkFlow == 0) {
+		vec3 TextureCoordinate = vec3(FS_IN.TexCoord.xy * Material2.xx,float(Material)); 
+		vec3 Norm = normalize(FS_IN.Normal);
+		vec3 Tang = normalize(FS_IN.Tangent);
+		vec3 Tangent = normalize(Tang - dot(Tang, Norm) * Norm);
+		vec3 Bitangent = normalize(cross(Tang, Norm));
+		mat3 TBN = mat3(Tangent,Bitangent,Norm); 
 		
-	Color.xyz = textureLod(Albedo,TextureCoordinate, 0.).xyz;  	
-	PositionSpecular.xyz = FS_IN.Position;
-	NormalRefractive.xyz = normalize(CalcNormalMappedNormal(Normal, Norm, TextureCoordinate, 0.25, TBN)); 
+		Color.xyz = textureLod(Albedo,TextureCoordinate, 0.).xyz;  	
+		PositionSpecular.xyz = FS_IN.Position;
+		NormalRefractive.xyz = normalize(CalcNormalMappedNormal(Normal, Norm, TextureCoordinate, 0.25, TBN)); 
 
-	vec3 DRM = textureLod(DRM, TextureCoordinate, 0.).xyz; 
+		vec3 DRM = textureLod(DRM, TextureCoordinate, 0.).xyz; 
 
-	Color.a = 1.0; 
-	NormalRefractive.a = DRM.y; 
-	PositionSpecular.a = DRM.z; 
+		Color.a = 0.0; 
+		NormalRefractive.a = DRM.y; 
+		PositionSpecular.a = DRM.z; 
+	}
+	else if(WorkFlow == 1) {
+		Color.xyz = RawMaterial.xyz; 
+		PositionSpecular.xyz = FS_IN.Position; 
+		NormalRefractive.xyz = normalize(FS_IN.Normal);
 
+		Color.a = 0.0; 
+		NormalRefractive.a = Material2.y; 
+		PositionSpecular.a = Material2.z; 
+	}
+	else {
+		Color.xyz = RawMaterial.xyz; 
+		PositionSpecular.xyz = FS_IN.Position; 
+		NormalRefractive.xyz = normalize(FS_IN.Normal);
+
+		Color.a = Material2.y; 
+		NormalRefractive.a = 0.f; 
+		PositionSpecular.a = 0.f; 
+	}
 }

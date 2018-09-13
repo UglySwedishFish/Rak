@@ -2,6 +2,7 @@
 #include <Dependencies\DependenciesMath.h> 
 #include <Rendering\Window.h> 
 #define PI 3.14159265
+#define RAK_DEBUG
 
 namespace Rak {
 	namespace Core {
@@ -9,6 +10,8 @@ namespace Rak {
 		inline T mix(T A, T B, float Mix) {
 			return A * static_cast<T>(Mix) + B * static_cast<T>(1.0 - Mix);
 		}
+
+
 		
 		struct BoundingBox {
 			Vector3f Min = Vector3f(100000.), Max = Vector3f(-100000.);

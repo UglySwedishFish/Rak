@@ -24,7 +24,7 @@ void Rak::Rendering::PathTracing::PathTracingPipeLine::Prepare(std::vector<Mesh:
 	ShadowPass = Core::Shader("Shaders/ShadowPass/vert.glsl", "Shaders/ShadowPass/frag.glsl"); 
 	SpatialFilter = Core::Shader("Shaders/Spatial/vert.glsl", "Shaders/Spatial/frag.glsl"); 
 	EquirectangularToCubeMap = Core::Shader("Shaders/EquirectangularToCubeMapShader/vert.glsl", "Shaders/EquirectangularToCubeMapShader/frag.glsl"); 
-	Enviroment = Core::LoadHDRI("hdr.hdr", true, false, EquirectangularToCubeMap);
+	Enviroment = Core::LoadHDRI("Resources/hdr.hdr", true, false, EquirectangularToCubeMap);
 
 	Trace = Core::MultiPassFrameBufferObject(Window.GetResolution() / 2, 6, true); //handles the raw tracing 
 	Temporal = Core::MultiPassFrameBufferObject(Window.GetResolution(), 3, false, true); //temporaly filters the upscaled version of the trace 
@@ -152,7 +152,7 @@ void Rak::Rendering::PathTracing::PathTracingPipeLine::ComputeTrace(Window & Win
 	glUniformMatrix4fv(glGetUniformLocation(ShadowPass.ShaderID, "ProjectionMatrix"), 1, false, glm::value_ptr(Shadows.ProjectionMatrix[0])); 
 	glUniformMatrix4fv(glGetUniformLocation(ShadowPass.ShaderID, "ViewMatrix"), 1, false, glm::value_ptr(Shadows.ViewMatrix[0]));
 
-	for (auto Model : Models) {
+	for (auto & Model : Models) {
 		Mesh::DrawModel(Model, ShadowPass, Camera, Window);
 	}
 
@@ -409,7 +409,17 @@ void Rak::Rendering::PathTracing::PathTracingPipeLine::UpdateMaterials()
 
 		for (int Material = 0; Material < WrappedModels[WrapModel].MaterialData.Materials.size() * 2; Material+=2) {
 			Data[WrapModel * MAX_MATERIALS + Material] = WrappedModels[WrapModel].MaterialData.Materials[Material / 2].AlbedoMultiplier;
-			Data[WrapModel * MAX_MATERIALS + Material + 1] = WrappedModels[WrapModel].MaterialData.Materials[Material / 2].Texture != 0 ? Vector3f(static_cast<float>(WrappedModels[WrapModel].MaterialData.Materials[Material / 2].Texture) / 128.f, -1.f, -1.f) : WrappedModels[WrapModel].MaterialData.Materials[Material / 2].ValueTwo;
+			switch (WrappedModels[WrapModel].MaterialData.Materials[Material / 2].WorkFlow) {
+			case 0:
+				Data[WrapModel * MAX_MATERIALS + Material + 1] = glm::vec3(WrappedModels[WrapModel].MaterialData.Materials[Material / 2].MaterialZoom, glm::intBitsToFloat(WrappedModels[WrapModel].MaterialData.Materials[Material / 2].Texture), -1.f);
+				break;
+			case 1:
+				Data[WrapModel * MAX_MATERIALS + Material + 1] = glm::vec3(0., WrappedModels[WrapModel].MaterialData.Materials[Material / 2].ValueTwo.y, WrappedModels[WrapModel].MaterialData.Materials[Material / 2].ValueTwo.z);
+				break;
+			case 2:
+				Data[WrapModel * MAX_MATERIALS + Material + 1] = glm::vec3(0.f, WrappedModels[WrapModel].MaterialData.Materials[Material / 2].ValueTwo.y, -20.f);
+				break;
+			}
 		}
 	}
 

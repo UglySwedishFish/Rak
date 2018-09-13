@@ -194,7 +194,7 @@ float RayModelIntersectionBVH(Ray ray, int Mesh, inout int TriangleHit, inout ve
 	int LeavesHit = 0;
 
 
-	while (StackID) {
+	while (StackID!=0) {
 		StackID--;
 		int BoxID = Stack[StackID];
 		vec4 Data1 = texelFetch(GetTexture(Mesh, ModelData), ivec3(WrapTo2DTexture(BoxID, Resolution[Mesh].x).yx, 4), 0);
@@ -507,26 +507,32 @@ void main() {
 		int Index = int(floor(GetTriangleData(Triangle,Mesh,3).z * 100.0 + .1f)) * 2;
 		vec3 RawSample1 = texelFetch(ModelMaterials, ivec2(Index, 0), 0).xyz; 
 		vec3 RawSample2 = texelFetch(ModelMaterials, ivec2(Index+1, 0), 0).xyz; 
-		float Metal = 0.; 
-		float Roughness = .1; 
+
+		int WorkFlow = RawSample2.z < -10.f ? 2 : RawSample2.z < -.5f ? 0 : 1; 
+
+		float Metal = 0.f; 
+		float Roughness = .1f; 
+		float Emmision = 0.f; 
 
 
-		if(RawSample2.y < 0.) {
+		if(WorkFlow == 0) {
 			
-			int MaterialTexture = int(floor(RawSample2.x * 128.f + .1f)); 
-			vec3 TextureCoordinate = vec3(UV,float(MaterialTexture)); 
+			int MaterialTexture = floatBitsToInt(RawSample2.y); 
+			vec3 TextureCoordinate = vec3(UV * RawSample2.x,float(MaterialTexture)); 
 
 			IndirectHit = texture(LowResTextures, TextureCoordinate); 
 		}
-		else {
-			
-
-
+		else if(WorkFlow == 1) {
+		
 			IndirectHit = vec4(RawSample1,1.); 
 			Roughness = RawSample2.y; 
 			Metal = RawSample2.z; 
 		}
+		else if(WorkFlow == 2) {
 		
+			IndirectHit = vec4(RawSample1,1.); 
+			Emmision = RawSample2.y; 
+		}
 
 
 		Hit = vec4(RAY.Origin + RAY.Direction * Traversal, Metal); //store metal component in alpha value of the hit 
@@ -534,7 +540,7 @@ void main() {
 		NormalHit = vec4(Normal, Roughness); 
 
 
-		Result += vec4(IndirectHit.xyz * GetDirectionalShadowColor(Hit.xyz, 2, SchlicksAproximation(RAY.Direction, Normal, Metal, Roughness), Roughness, Normal, RAY.Direction), 0.); 
+		Result += vec4(IndirectHit.xyz * (GetDirectionalShadowColor(Hit.xyz, 2, SchlicksAproximation(RAY.Direction, Normal, Metal, Roughness), Roughness, Normal, RAY.Direction) + vec3(Emmision)), 0.); 
 		
 
 	}
@@ -548,7 +554,9 @@ void main() {
 		Hit = vec4(-1.); 
 	}
 	OutPosition = PositionRaw; //useful for upscaling
+	/*if(IsSecondaryRay) //if you want to try only one bounce, uncomment this 
+		OutTrace = vec4(0.,0.,0.,IsDiffuseRay ? 1. : -1.); 
+	else//*/
 	OutTrace = vec4(Result.xyz * AO,IsDiffuseRay ? 1. : -1.); //required for the temporal filter down the line 
-	
 }
 

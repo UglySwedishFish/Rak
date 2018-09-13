@@ -12,7 +12,7 @@ namespace Rak {
 		void ShadowStructure::PrepareShadowStructure(Vector2i Resolution)
 		{
 			for (int ShadowProjection = 0; ShadowProjection < 3; ShadowProjection++) {
-				ProjectionMatrix[ShadowProjection] = Rak::Core::ShadowOrthoMatrix(5.0 * pow(7.f, float(ShadowProjection)), 0.1, 100.);
+				ProjectionMatrix[ShadowProjection] = Rak::Core::ShadowOrthoMatrix(3.0 * pow(7.f, float(ShadowProjection)), 0.1, 100.);
 				ShadowMaps[ShadowProjection] = Core::FrameBufferObject(Resolution, true, false);
 			}
 		}

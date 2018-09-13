@@ -6,7 +6,7 @@
 template<typename T>
 T Rak::Core::Interpolate(T A, T B, T X)
 {
-	T FT = x * static_cast<T>(3.1415);
+	T FT = X * static_cast<T>(3.1415);
 }
 
 

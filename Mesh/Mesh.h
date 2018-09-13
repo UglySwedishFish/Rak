@@ -44,6 +44,8 @@ namespace Rak {
 				int Texture;
 				Vector3f AlbedoMultiplier;
 				Vector3f ValueTwo;
+				float MaterialZoom = 1.f; 
+				int WorkFlow = 0; 
 				inline Material(int tex = 88, Vector3f c = Vector3f(1.)) : Texture(tex), AlbedoMultiplier(c), ValueTwo(0.) {}
 			};
 

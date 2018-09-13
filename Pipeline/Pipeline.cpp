@@ -80,6 +80,8 @@ void Rak::Rendering::Combined::Pipeline::Run(Window & Window, Control::Camera & 
 						break; 
 					case sf::Mouse::Right:
 						Mesh::Select(Window, Camera, Models,SelectedMesh, SelectedMaterial); 
+						std::cout << SelectedMaterial << '\n'; 
+
 						break; 
 					}
 				default:
@@ -103,11 +105,11 @@ void Rak::Rendering::Combined::Pipeline::Run(Window & Window, Control::Camera & 
 			PathTracing.ComputeTrace(Window, Camera, Deffered, Models, DebugInfo);
 	//	}
 
-		std::cout << SelectedMaterial << '\n';
+		//std::cout << SelectedMaterial << '\n';
 
 		Compositing(Camera); 
 	
-		GUI.Draw(Window, DebugInfo);
+		GUI.Draw(Window, DebugInfo, SelectedMaterial, Models[SelectedMesh], PathTracing, SelectedMesh);
 		ImGui::SFML::Render(*Window.GetRawWindow());
 
 		Window.GetRawWindow()->display(); 
