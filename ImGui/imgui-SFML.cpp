@@ -562,6 +562,8 @@ void RenderDrawLists(ImDrawData* draw_data)
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_SCISSOR_TEST);
 		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK); 
 }
 
 bool imageButtonImpl(const sf::Texture& texture, const sf::FloatRect& textureRect, const sf::Vector2f& size, const int framePadding,

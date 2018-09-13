@@ -42,18 +42,18 @@ References:
 int main() {
 	Window Screen;
 	Screen.SetTitle("Rak."); 
-	Screen = Window(Vector2i(1920, 1080), false);
+	Screen = Window(Vector2i(2560, 1080), false);
 	
 	
 	Rak::Control::Camera Camera = Rak::Control::Camera(70.0,0.01,1000.0,Vector3f(0.122498, 1.76084, 7.83415), Vector3f(0.), Screen); //fov, znear, zfar, position, rotation, display 
 
 	srand(time(0)); 
 
-	std::vector<Rak::Rendering::Mesh::Model> Models{ Rak::Rendering::Mesh::Model("Test.obj") };
+	std::vector<Rak::Rendering::Mesh::Model> Models{ Rak::Rendering::Mesh::Model("Resources/Street.obj") };
 	for (int i = 0; i < Models[0].MaterialData.Materials.size(); i++) {
 		Models[0].MaterialData.Materials[i].AlbedoMultiplier = Vector3f(1.);
 		Models[0].MaterialData.Materials[i].ValueTwo = Vector3f(0.,0.,0.);
-		Models[0].MaterialData.Materials[i].Texture = 0;
+		Models[0].MaterialData.Materials[i].Texture = rand()%80;
 	}
 	Models[0].MaterialData.UpdateMaterials(); 
 
@@ -62,53 +62,3 @@ int main() {
 	Pipeline.Run(Screen, Camera); 
 }
 	
-
-
-/*
-#include "ImGui/imgui.h"
-#include "ImGui/imgui-SFML.h"
-
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Clock.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
-
-int main()
-{
-	sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
-	window.setFramerateLimit(60);
-	ImGui::SFML::Init(window);
-
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
-	sf::Clock deltaClock;
-	while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			ImGui::SFML::ProcessEvent(event);
-
-			if (event.type == sf::Event::Closed) {
-				window.close();
-			}
-		}
-
-		ImGui::SFML::Update(window, deltaClock.restart());
-
-		//ImGui::ShowTestWindow();
-
-		ImGui::Begin("Hello, world!");
-		ImGui::Button("Look at this pretty button");
-		ImGui::End();
-
-		window.clear();
-		window.draw(shape);
-		ImGui::SFML::Render(window);
-		window.display();
-	}
-
-	ImGui::SFML::Shutdown();
-
-	return 0;
-}
-*/
