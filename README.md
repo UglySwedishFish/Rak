@@ -12,6 +12,7 @@ Rak is currently **not** ready for any production (or even hobby) use. Rak is **
 # New with Rak 0.11a
   - Fixed bug where material selection wouldn't always select the correct material
   - Fixed bug where emissive objects would be completely white if emission was set too high 
+  - Fixed bug with premade materials not being properly handled in lighting
   - **[Indev]** Added preview mode to all the different materials, making material selection far better
  
 # New with Rak 0.1a
