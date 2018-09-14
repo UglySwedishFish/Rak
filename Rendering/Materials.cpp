@@ -77,7 +77,7 @@ void Rak::Rendering::PrepareMaterials()
 	CurrentStructure.Normal.LoadMaterials(Normal, 1024);
 	CurrentStructure.DRM.LoadMaterials(DRM, 1024);
 	CurrentStructure.DownScaledAlbedo.LoadMaterials(LowResAlbedo, 256);
-
+;
 }
 
 std::array<const char*, 3> TextureNames = { "Albedo", "DRM", "Normal" }; 

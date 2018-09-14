@@ -1,0 +1,24 @@
+Setting up your first scene.
+
+
+Models:
+
+Importing a model can be done via the top bar (File -> Import) or via CTRL + I. 
+Current models official supported includes (but is not excluded to) OBJ, FBX, 3DS, DAE and BLEND
+
+Camera
+
+Adding a camera can be done via the top bar (Add -> Camera)
+A scene can have multiple cameras, but only one can be active at a time.
+Making a camera active is done by right clicking it. 
+
+Lighting: 
+
+A sky light can be set from a HDR. This is done via the top bar (Scene -> Set Sky) 
+A directional light will by default be in your scene. You can choose to set the strenght to 0 
+if you want to not use it for your scene. 
+Currently, you can also have one point light and one spot light as well, though this number will probably increase in the future. 
+
+Compositing: 
+
+Compositing is currently not available (as of Rak 0.1a)

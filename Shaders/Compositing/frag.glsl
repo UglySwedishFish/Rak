@@ -18,7 +18,7 @@ void main() {
 		Color = texture(Enviroment, Direction.xyz).xyz;
 	}
 	else {
-		Color = texture(Lighting, TexCoord).xyz + AlbedoSample.xyz * AlbedoSample.aaa;
+		Color = texture(Lighting, TexCoord).xyz + (AlbedoSample.a < 1. ? (AlbedoSample.xyz * AlbedoSample.aaa) : normalize(AlbedoSample.xyz * AlbedoSample.aaa));
 	}
 	Color = pow(Color,vec3(.454545)); //.454545 is for gamma correction		
 }

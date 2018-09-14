@@ -31,7 +31,7 @@ namespace Rak {
 		const std::array<const std::string, 17> CategoryNames = 
 		{ "Bark", "Bricks", "Cloth", "Cobblestone", "Concrete", "Fabric", "Gravel", "Ground", "Leather", "Metal", "Painted Metal", "Planks", "Rock", "Stone Tiles", "Stones", "Tiles", "Wood"}; 
 
-		enum Categories { BARK, BRICKS, CLOTH, COBBLESTONE, CONCRETE, FABRIC, GRAVEL, GROUND, LEATHER, METAL, PAINTED_METAL, PLANKS, ROCK, STONE_TILES, STONES, TILES, WOOD  };
+		enum Categories { BARK, BRICKS, CLOTH, COBBLESTONE, CONCRETE, FABRIC, GRAVEL, GROUND, LEATHER, METAL, PAINTED_METAL, PLANKS, ROCK, STONE_TILES, STONES, TILES, WOOD, CATEGORIES  };
 
 		MaterialStructure GetMaterialStructure(); 
 		void PrepareMaterials(); 

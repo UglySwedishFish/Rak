@@ -2,6 +2,7 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui-SFML.h"
 #include "Pipeline/HybridPathTracing.h"
+#include "Rendering/Materials.h"
 #include <array>
 
 namespace Rak {
@@ -50,6 +51,9 @@ namespace Rak {
 			};
 
 			struct MaterialEditor : GUIElement {
+
+				int TextureCategory = 0; 
+				std::array<std::vector<sf::Texture>, Categories::CATEGORIES> MaterialTextures; 
 
 				void Init(Window & Window); 
 				void Draw(Window & Window, std::array<GUIElement*, GuiElements::SIZE> &Elements, int & ActiveMaterial, Mesh::Model & ActiveModel, PathTracing::PathTracingPipeLine & PathTracing, int ActiveModelIndex);

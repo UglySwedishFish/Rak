@@ -59,6 +59,7 @@ void Rak::Rendering::Mesh::Select(Window & Window, const Control::Camera & Camer
 			if (RayTriangleIntersection(Models[CurrentModel].ModelData.Vertices[Triangle], Models[CurrentModel].ModelData.Vertices[Triangle + 1], Models[CurrentModel].ModelData.Vertices[Triangle + 2], Ray, TemporaryDistance, ClosestDistance)) {
 				Material = floor(Models[CurrentModel].ModelData.TextureCoordinates[Triangle].z * 100.f + .1f);
 				Model = CurrentModel; 
+				ClosestDistance = TemporaryDistance; 
 			}
 		}
 	}

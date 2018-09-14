@@ -270,16 +270,36 @@ namespace Rak {
 
 			void MaterialEditor::Init(Window & Window)
 			{
-				
+				//Load material textures 
+
+				for (int Index = 0; Index < MaterialTextures.size(); Index++) {
+					auto & Vector = MaterialTextures[Index]; 
+
+					for (int Texture = 0; Texture < TextureCategories[Index].LengthOfIndex; Texture++) {
+						std::string File = "Materials/LowResolution/" + CategoryNames[Index] + ' ' + std::to_string(Texture + 1) + "/Albedo.jpg"; 
+
+						sf::Texture TemporaryTexture; 
+						TemporaryTexture.loadFromFile(File); 
+
+						Vector.push_back(TemporaryTexture); 
+
+					}
+
+				}
+
 			}
+
+			const char * CategoryNamesCChar[] = { "Bark", "Bricks", "Cloth", "Cobblestone", "Concrete", "Fabric", "Gravel", "Ground", "Leather", "Metal", "Painted Metal", "Planks", "Rock", "Stone Tiles", "Stones", "Tiles", "Wood" };
+
 			void MaterialEditor::Draw(Window & Window, std::array<GUIElement*, GuiElements::SIZE>& Elements, int & ActiveMaterial, Mesh::Model & ActiveModel, PathTracing::PathTracingPipeLine & PathTracing, int ActiveModelIndex)
 			{
 
 				ImGui::Begin("Material Edtior", &Show);
 
+
 				ImGui::Text("Material workflow: "); 
 				ImGui::ListBox("", &ActiveModel.MaterialData.Materials[ActiveMaterial].WorkFlow, Material_WorkFlows, 3); 
-
+	
 				bool Update = false; 
 				
 				if (ActiveModel.MaterialData.Materials[ActiveMaterial].WorkFlow == 0) {
@@ -291,6 +311,29 @@ namespace Rak {
 					if (ImGui::SliderFloat("Texture Zoom", &ActiveModel.MaterialData.Materials[ActiveMaterial].MaterialZoom, 0.f, 25.f)) {
 						Update = true;
 					}
+
+					ImGui::Text("Texture category: "); 
+
+
+
+					ImGui::SliderInt(CategoryNames[TextureCategory].c_str(), &TextureCategory, 0, 16);
+
+					for (int Texture = 0; Texture < MaterialTextures[TextureCategory].size(); Texture++) {
+						sf::Vector2f Size(128.,128.); 
+						if (ImGui::ImageButton(MaterialTextures[TextureCategory][Texture], Size)) {
+
+							int TextureAddon = 0; 
+							
+							for (int NewCat = TextureCategory - 1; NewCat != -1; NewCat--) {
+								TextureAddon += TextureCategories[NewCat].LengthOfIndex; 
+							}
+							
+
+							ActiveModel.MaterialData.Materials[ActiveMaterial].Texture = TextureAddon + Texture;
+							Update = true; 
+						}
+					}
+
 
 				}
 
@@ -318,7 +361,7 @@ namespace Rak {
 				
 				else if (ActiveModel.MaterialData.Materials[ActiveMaterial].WorkFlow == 2) {
 
-					if (ImGui::SliderFloat("Emmision", &ActiveModel.MaterialData.Materials[ActiveMaterial].ValueTwo.y, 0., 25.)) {
+					if (ImGui::SliderFloat("Emission", &ActiveModel.MaterialData.Materials[ActiveMaterial].ValueTwo.y, 0., 25.)) {
 						Update = true; 
 					}
 
@@ -326,7 +369,7 @@ namespace Rak {
 						ActiveModel.MaterialData.Materials[ActiveMaterial].AlbedoMultiplier.y,
 						ActiveModel.MaterialData.Materials[ActiveMaterial].AlbedoMultiplier.z };
 
-					if (ImGui::ColorPicker3("Emmision color", Color)) {
+					if (ImGui::ColorPicker3("Emission color", Color)) {
 						Update = true; 
 					}
 
