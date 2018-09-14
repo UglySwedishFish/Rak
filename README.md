@@ -12,7 +12,7 @@ Rak is currently **not** ready for any production (or even hobby) use. Rak is **
 # New with Rak 0.1-0.19a
   - Completely new Material Creator, allowing for *3* material types. These are, *premade material*, *custom lambert material* and *Custom emissive material* 
   - Minor bug fixes
-  **These bug fixes include** 
+  - **These bug fixes include** 
   - Fixed bug where traversal wouldn't work on certain gpus
   - Fixed **error** with templates in core.cpp which would fail to compile in certain compilers
   
