@@ -319,19 +319,27 @@ namespace Rak {
 					ImGui::SliderInt(CategoryNames[TextureCategory].c_str(), &TextureCategory, 0, 16);
 
 					for (int Texture = 0; Texture < MaterialTextures[TextureCategory].size(); Texture++) {
-						sf::Vector2f Size(128.,128.); 
-						if (ImGui::ImageButton(MaterialTextures[TextureCategory][Texture], Size)) {
-
-							int TextureAddon = 0; 
+						//ImGui::BeginMenuBar(); 
+						for (int OtherTexture = Texture; OtherTexture < std::min(int(MaterialTextures[TextureCategory].size()), Texture + 4); OtherTexture++) {
+							sf::Vector2f Size(128., 128.);
 							
-							for (int NewCat = TextureCategory - 1; NewCat != -1; NewCat--) {
-								TextureAddon += TextureCategories[NewCat].LengthOfIndex; 
+							if (ImGui::ImageButton(MaterialTextures[TextureCategory][OtherTexture], Size)) {
+
+								int TextureAddon = 0;
+
+								for (int NewCat = TextureCategory - 1; NewCat != -1; NewCat--) {
+									TextureAddon += TextureCategories[NewCat].LengthOfIndex;
+								}
+
+
+								ActiveModel.MaterialData.Materials[ActiveMaterial].Texture = TextureAddon + Texture;
+								Update = true;
 							}
-							
-
-							ActiveModel.MaterialData.Materials[ActiveMaterial].Texture = TextureAddon + Texture;
-							Update = true; 
+							Texture++;
 						}
+						//ImGui::EndMenuBar(); 
+						
+
 					}
 
 
