@@ -32,6 +32,6 @@ Rak is currently **not** ready for any production (or even hobby) use. Rak is **
   - Proper documentation (both via github but also in the program itself
   - Better temporal + spatial filtering
   - Ability to actually render images, and save these rendered images to files. (png + jpeg)
-  - Basic key-frame animation (position and scale, or rotation nor skeletal) 
+  - Basic key-frame animation (position and scale, not rotation nor skeletal) 
   - Ability to have both rendered, solid and wireframe view. (currently only rendered is supported) 
   - And way, way more!
