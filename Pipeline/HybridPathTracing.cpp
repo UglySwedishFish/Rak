@@ -423,7 +423,7 @@ void Rak::Rendering::PathTracing::PathTracingPipeLine::UpdateMaterials()
 		}
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, MAX_MATERIALS * 2, WrappedModels.size(), 0, GL_RGB, GL_FLOAT, &Data[0]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, MAX_MATERIALS * 2, WrappedModels.size(), 0, GL_RGB, GL_FLOAT, &Data[0]);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
