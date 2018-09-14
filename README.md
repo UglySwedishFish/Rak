@@ -6,14 +6,20 @@ Rak uses SFML for window setup and texture loading, assimp for model loading, gl
 
 The repo for sfml imgui can be found [here](https://github.com/eliasdaler/imgui-sfml)
 
-# Rak current version - 0.1a
+# Rak current version - 0.11a
 Rak is currently **not** ready for any production (or even hobby) use. Rak is **seriously** lacking features and is in a **very** early stage of development. Thus, there will be no releases for this and many upcomming versions. There is no date for the first Rak release promised, as it is hard to estimate how long some of these features will take to implement. 
 
-# New with Rak 0.1-0.19a
-  - Completely new Material Creator, allowing for *3* material types. These are, *premade material*, *custom lambert material* and *Custom emissive material* 
+# New with Rak 0.11a
+  - Fixed bug where material selection wouldn't always select the correct material
+  - Fixed bug where emissive objects would be completely white if emission was set too high 
+  - **[Indev]** Added preview mode to all the different materials, making material selection far better
+ 
+# New with Rak 0.1a
+  - Completely new Material Creator, allowing for *3* material types. These are, *premade material*, *custom lambert material* and *Custom emissive material
   - Fixed bug where traversal wouldn't work on certain gpus
-  - Fixed **error** with templates in core.cpp which would fail to compile in certain compilers
+  - Fixed **error** with templates in core.cpp which would fail to compile in certain compiler
   - Other minor bug fixes
+
   
 # Planned for Rak 0.2a 
   - Saving and loading rak scenes. 
