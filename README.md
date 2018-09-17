@@ -32,12 +32,17 @@ Rak is currently **not** ready for any production (or even hobby) use. Rak is **
   - Ability to translate, rotate and scale models. 
   - Better BVH generation 
   - More Cache-friendly traversal of said BVH
+  - (Potentially) Faster Ray/Triangle intersection. 
   - Proper importing of models 
   - Tesselation
+  - Compositing & Post processing effects (this includes bloom/glow, bokeh dof, proper color correction) 
   - Way, way more premade materials 
-  - 2 new material types (*Refractive material* and *Translucent material*) 
+  - 3 new material types (*Refractive material*, *Shadow catcher*, *Translucent material*)
+  - Custom textured materials (right now only solid values are supported) 
+  - Properly physically acurate bsdfs (right now its mostly just guesswork) 
   - Proper documentation (both via github but also in the program itself
-  - Better temporal + spatial filtering
+  - Improved temporal stability in both checkerboard system and temporal rendering 
+  - Improved spatial filtering that uses physically accurate weights instead of kernels. 
   - Ability to actually render images, and save these rendered images to files. (png + jpeg)
   - Basic key-frame animation (position and scale, not rotation nor skeletal) 
   - Ability to have both rendered, solid and wireframe view. (currently only rendered is supported) 
